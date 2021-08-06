@@ -42,7 +42,7 @@ export function useSharedCursors<T = void>(
   const renderingCursors = useMemo(() => {
     let hasMyCursor = false;
     const filteredCursors = cursors.filter((cursor: CursorDataType<T>) => {
-      const isMyCursor = cursor.uid !== uid;
+      const isMyCursor = cursor.uid === uid;
       if (isMyCursor) {
         hasMyCursor = true;
       }
@@ -59,13 +59,15 @@ export function useSharedCursors<T = void>(
         cursor.x = myCursor.x;
         cursor.y = myCursor.y;
       }
-      cursor.x *= window.innerWidth;
       return cursor;
     });
   }, [cursors, myCursor]);
 
+
+  console.log(renderingCursors);
+
   return {
-    cursors: renderingCursors,
+    cursors: renderingCursors.map((cursor) => ({...cursor, x: cursor.x * window.innerWidth})),
     setContext,
   };
 }

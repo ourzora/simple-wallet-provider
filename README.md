@@ -1,7 +1,13 @@
-# pixel-map-renderer
-renders pixelmapped avatars such as punks
+# firebase-cursor-server aka cursorparty
 
-works for any square grid-layout avatar format
+set of react hooks that integrates with firebase
+usable for cursor parties
+
+can use a generic realtime backend (firebase is just the only impl'd one right now)
+
+see example for more
+
+tech used in https://punks.house/
 
 
 run example: 
