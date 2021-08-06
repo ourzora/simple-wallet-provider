@@ -1,5 +1,5 @@
 {
-  "name": "cursorparty",
+  "name": "cursor-party",
   "version": "1.0.0",
   "description": "uses firebase realtime db (or generic backend) to render user-controlled objects on screen",
   "main": "dist/index.js",
