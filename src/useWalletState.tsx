@@ -7,8 +7,8 @@ import { WalletModalOpenContext } from "./WalletModalOpenContext";
 export const useWalletState = () => {
   const { active, account, deactivate } = useWeb3React();
   const { getString } = useThemeConfig();
-  const {setIsOpen} = useContext(WalletModalOpenContext);
-  const addressShortened = account ? shortenAddress(account) : undefined
+  const { setIsOpen } = useContext(WalletModalOpenContext);
+  const addressShortened = account ? shortenAddress(account) : undefined;
   const actionText = !account
     ? getString("CONNECT_WALLET_BUTTON_TEXT")
     : getString("DISCONNECT_WALLET_BUTTON_TEXT");
@@ -16,13 +16,15 @@ export const useWalletState = () => {
     active,
     openModal: () => setIsOpen(true),
     buttonAction: () => {
-      active ? deactivate() : setIsOpen(true)
+      active ? deactivate() : setIsOpen(true);
     },
-    connectedInfo: active ? `${getString("CONNECTED_BUTTON_TEXT")} ${addressShortened}` : undefined,
+    connectedInfo: active
+      ? `${getString("CONNECTED_BUTTON_TEXT")} ${addressShortened}`
+      : undefined,
     account: account
       ? {
           address: account,
-          addressShortened
+          addressShortened,
         }
       : undefined,
     actionText,

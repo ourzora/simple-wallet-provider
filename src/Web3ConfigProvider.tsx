@@ -15,7 +15,11 @@ export const Web3ConfigProvider = ({
   networkId,
   children,
   clientInfo,
+  theme = {},
+  strings = {},
 }: {
+  theme?: Partial<typeof Theme>;
+  strings?: Partial<typeof Strings>;
   rpcUrl: string;
   networkId: number;
   children: ReactNode;
@@ -36,7 +40,7 @@ export const Web3ConfigProvider = ({
     clientMeta: clientInfo,
   });
 
-  console.log(walletConnectConnector)
+  console.log(walletConnectConnector);
 
   const config = {
     networkId: networkId,
@@ -45,8 +49,8 @@ export const Web3ConfigProvider = ({
       injectedConnector,
       walletConnectConnector,
     },
-    theme: Theme,
-    strings: Strings,
+    theme: Object.assign({}, Theme, theme),
+    strings: Object.assign({}, Strings, strings),
   };
 
   const [isOpen, setIsOpen] = useState<boolean>(false);

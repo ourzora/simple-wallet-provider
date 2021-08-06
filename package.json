@@ -1,7 +1,8 @@
 {
-  "name": "cursor-party",
+  "name": "@zoralabs/simple-wallet-provider",
+  "private": true,
   "version": "1.0.0",
-  "description": "uses firebase realtime db (or generic backend) to render user-controlled objects on screen",
+  "description": "simple wallet provider app",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "source": "src/index.ts",
@@ -10,11 +11,11 @@
   ],
   "scripts": {
     "build": "yarn run prepack",
-    "prettier": "prettier src example --write",
+    "prettier": "prettier src --write",
     "prepack": "yarn clean && yarn run prettier && yarn run tsc",
     "clean": "rm -rf ./dist"
   },
-  "repository": "git@github.com:iainnash/cursorparty.git",
+  "repository": "git@github.com:ourzora/simple-wallet-provider.git",
   "author": "Iain <iain@zora.co>",
   "license": "MIT",
   "dependencies": {

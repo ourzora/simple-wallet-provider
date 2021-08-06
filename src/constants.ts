@@ -66,5 +66,5 @@ export const Strings = {
   CONNECT_WALLET_ARIA_LABEL: "connect wallet modal",
   CONNECT_WALLET_BUTTON_TEXT: "Connect Wallet",
   CONNECTED_BUTTON_TEXT: "Connected to ",
-  DISCONNECT_WALLET_BUTTON_TEXT: 'Disconnect Wallet'
+  DISCONNECT_WALLET_BUTTON_TEXT: "Disconnect Wallet",
 };
