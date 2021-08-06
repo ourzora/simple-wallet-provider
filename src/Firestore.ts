@@ -21,7 +21,7 @@ export class Firestore<T> implements Store<T> {
       .on("value", (snapshot) => {
         const val = snapshot.val();
         if (val) {
-          updateCallback(Object.keys(val) as CursorDataType<T>[]);
+          updateCallback(Object.values(val) as CursorDataType<T>[]);
         }
       });
   };

@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { debounce } from "ts-debounce";
 import {
   useSharedCursorsType,
@@ -10,13 +10,12 @@ import { useCookieBackedUserId } from "./useCookieBackedUserId";
 import { useCursorEvents } from "./useCursorEvents";
 
 export function useSharedCursors<T = void>(
-  args: useSharedCursorsType<T>
+  { showMyCursor = false, store }: useSharedCursorsType<T>
 ): CursorHookType<T> {
   const [cursors, setCursors] = useState<Array<CursorDataType<T>>>([]);
   const [myCursor, setMyCursor] = useState<CursorCoordinates | undefined>(
     undefined
   );
-  const { showMyCursor = false, store } = args;
   const uid = useCookieBackedUserId({ cookieName: "userId" });
   const debouncedUpdateCoordinates = useMemo(
     () => debounce(store.updateCoordinates),
@@ -27,9 +26,11 @@ export function useSharedCursors<T = void>(
     debouncedUpdateCoordinates(uid, x, y);
   });
 
-  store.onUpdates((data: CursorDataType<T>[]) => {
-    setCursors(data);
-  });
+  useEffect(() => {
+    store.onUpdates((data: CursorDataType<T>[]) => {
+      setCursors(data);
+    });
+  }, [store])
 
   const setContext = useCallback(
     (context: T) => {
@@ -38,21 +39,33 @@ export function useSharedCursors<T = void>(
     [store, uid]
   );
 
-  let hasMyCursor = false;
-  const filteredCursors = cursors.filter((cursor: CursorDataType<T>) => {
-    const isMyCursor = cursor.uid !== uid;
-    return showMyCursor ? true : !isMyCursor;
-  });
+  const renderingCursors = useMemo(() => {
+    let hasMyCursor = false;
+    const filteredCursors = cursors.filter((cursor: CursorDataType<T>) => {
+      const isMyCursor = cursor.uid !== uid;
+      if (isMyCursor) {
+        hasMyCursor = true;
+      }
+      return showMyCursor ? true : !isMyCursor;
+    });
 
-  if (!hasMyCursor && showMyCursor && myCursor) {
-    filteredCursors.push({ x: myCursor.x, y: myCursor.y, uid: uid });
-  }
+    let myCursorList: CursorDataType<T>[] = [];
+    if (!hasMyCursor && myCursor) {
+      myCursorList = [{x: myCursor?.x, y: myCursor.y, uid}];
+    }
 
-  return {
-    cursors: filteredCursors.map((cursor: CursorDataType<T>) => {
+    return [...filteredCursors, ...myCursorList].map((cursor: CursorDataType<T>) => {
+      if (cursor.uid === uid && myCursor) {
+        cursor.x = myCursor.x;
+        cursor.y = myCursor.y;
+      }
       cursor.x *= window.innerWidth;
       return cursor;
-    }),
+    });
+  }, [cursors, myCursor]);
+
+  return {
+    cursors: renderingCursors,
     setContext,
   };
 }
