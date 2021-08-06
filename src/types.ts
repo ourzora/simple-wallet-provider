@@ -5,22 +5,22 @@ export interface Store<T> {
 }
 
 export type useSharedCursorsType<T> = {
-  showMyCursor?: boolean,
-  getDefaultContext?: () => T
-  store: Store<T>,
+  showMyCursor?: boolean;
+  getDefaultContext?: () => T;
+  store: Store<T>;
 };
 
 export type CursorCoordinates = {
-  x: number,
-  y: number,
-}
+  x: number;
+  y: number;
+};
 
 export type CursorDataType<T> = CursorCoordinates & {
-  context?: T,
-  uid: number,
-}
+  context?: T;
+  uid: number;
+};
 
 export type CursorHookType<T> = {
   cursors: CursorDataType<T>[];
-  setContext: ((context: T) => void);
-}
+  setContext: (context: T) => void;
+};

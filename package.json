@@ -1,7 +1,7 @@
 {
   "name": "cursorparty",
   "version": "1.0.0",
-  "description": "uses firebase realtime db (or generic backend) to render user-controlled objects on screen"",
+  "description": "uses firebase realtime db (or generic backend) to render user-controlled objects on screen",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "source": "src/index.ts",
