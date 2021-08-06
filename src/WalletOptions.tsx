@@ -12,11 +12,19 @@ import { WalletOption } from "./WalletOption";
 import { UserRejectedRequestError as UserRejectedRequestErrorInjected } from "@web3-react/injected-connector";
 import { Web3ConfigurationContext } from "./config";
 import { useThemeConfig } from "./useThemeConfig";
+import { WalletModalOpenContext } from "./WalletModalOpenContext";
 
 export const WalletOptions: React.FC = () => {
   const { deactivate, error, active, activate } = useWeb3React();
   const { getStyles } = useThemeConfig();
+  const {setIsOpen} = useContext(WalletModalOpenContext);
   const { connectors, networkId } = useContext(Web3ConfigurationContext);
+
+  useEffect(() => {
+    if (active) {
+      setIsOpen(false);
+    }
+  }, [active]);
 
   // @ts-ignore
   const hasWeb3 = isClientSide && !!window?.web3;

@@ -5,6 +5,7 @@ import { WalletOptions } from "./WalletOptions";
 
 export const ConnectWalletModal = () => {
   const { getString, getStyles } = useThemeConfig();
+
   return (
     <ModalOverlay canClose>
       <ModalContent
