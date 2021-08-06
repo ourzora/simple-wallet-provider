@@ -26,14 +26,9 @@ export const Theme = {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: var(--black);
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.05), 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 0;
-    border: 4px inset var(--punk-green);
     overflow-x: hidden;
-    * {
-      color: var(--white) !important;
-    }
   `,
   walletOptionsWrapper: css``,
   walletOption: css`
@@ -54,7 +49,6 @@ export const Theme = {
     color: var(--punk-pink) !important;
     width: 100%;
     text-align: center;
-    padding-top: var(--pad-sm);
   `,
   injectedIcon: css``,
   metamaskIcon: css``,

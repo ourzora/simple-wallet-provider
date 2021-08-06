@@ -1,7 +1,6 @@
 {
   "name": "@zoralabs/simple-wallet-provider",
-  "private": true,
-  "version": "1.0.0",
+  "version": "0.0.2",
   "description": "simple wallet provider app",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
