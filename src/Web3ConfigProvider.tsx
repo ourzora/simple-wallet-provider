@@ -1,13 +1,14 @@
 import { Web3ConfigurationContext } from "./config";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
-import { ReactNode, useMemo, useState } from "react";
+import { Fragment, ReactNode, useMemo, useState } from "react";
 import { WalletClientInfo } from "./types";
 import { Theme, Strings } from "./constants";
 import { WalletModalOpenContext } from "./WalletModalOpenContext";
 import { ConnectWalletModal } from "./ConnectWalletModal";
 import { Web3ReactProvider } from "@web3-react/core";
 import { getLibraryByNetwork } from "./utils/getLibrary";
+import Web3ReactManager from "./Web3ReactManager";
 
 export const Web3ConfigProvider = ({
   rpcUrl,
@@ -35,6 +36,8 @@ export const Web3ConfigProvider = ({
     clientMeta: clientInfo,
   });
 
+  console.log(walletConnectConnector)
+
   const config = {
     networkId: networkId,
     rpcUrl: rpcUrl,
@@ -53,8 +56,12 @@ export const Web3ConfigProvider = ({
     <Web3ReactProvider getLibrary={getLibrary}>
       <WalletModalOpenContext.Provider value={{ isOpen, setIsOpen }}>
         <Web3ConfigurationContext.Provider value={config}>
-          <ConnectWalletModal />
-          {children}
+          <Web3ReactManager>
+            <Fragment>
+              <ConnectWalletModal />
+              {children}
+            </Fragment>
+          </Web3ReactManager>
         </Web3ConfigurationContext.Provider>
       </WalletModalOpenContext.Provider>
     </Web3ReactProvider>

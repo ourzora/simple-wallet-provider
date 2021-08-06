@@ -13,11 +13,12 @@ import { UserRejectedRequestError as UserRejectedRequestErrorInjected } from "@w
 import { Web3ConfigurationContext } from "./config";
 import { useThemeConfig } from "./useThemeConfig";
 import { WalletModalOpenContext } from "./WalletModalOpenContext";
+import '@walletconnect/web3-provider';
 
 export const WalletOptions: React.FC = () => {
   const { deactivate, error, active, activate } = useWeb3React();
   const { getStyles } = useThemeConfig();
-  const {setIsOpen} = useContext(WalletModalOpenContext);
+  const { setIsOpen } = useContext(WalletModalOpenContext);
   const { connectors, networkId } = useContext(Web3ConfigurationContext);
 
   useEffect(() => {

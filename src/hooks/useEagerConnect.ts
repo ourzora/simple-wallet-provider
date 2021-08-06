@@ -5,7 +5,7 @@ import { AbstractConnector } from "@web3-react/abstract-connector";
 import { isMobile } from "react-device-detect";
 import { Web3ConfigurationContext } from "../config";
 import { isClientSide } from "../constants";
-import { fetchLastConnectorType } from "src/connectors";
+import { fetchLastConnectorType } from "../connectors";
 
 function delay(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));

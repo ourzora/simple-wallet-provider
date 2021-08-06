@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {Web3ConfigProvider} from '../src/Web3ConfigProvider';
-import { useWalletOpen } from "../src/useWalletOpen";
+import { useWalletState } from "../src/useWalletState";
+import 'babel-polyfill'
 
 const CLIENT_INFO = {
   name: 'testing wallet connector',
@@ -10,12 +11,15 @@ const CLIENT_INFO = {
 };
 
 const ConnectTrigger = () => {
-  const {openWallet} = useWalletOpen();
+  const {buttonAction, actionText, connectedInfo} = useWalletState();
 
   return (
-    <button onClick={() => openWallet()}>
-      open wallet
-    </button>
+    <Fragment>
+      {connectedInfo}
+      <button onClick={() => buttonAction()}>
+        {actionText}
+      </button>
+  </Fragment>
   )
 
 }
@@ -23,7 +27,7 @@ const ConnectTrigger = () => {
 export const WalletExample = () => {
 
   return (
-    <Web3ConfigProvider rpcUrl="https://google.com" networkId={1} clientInfo={CLIENT_INFO}>
+    <Web3ConfigProvider rpcUrl="" networkId={1} clientInfo={CLIENT_INFO}>
       <ConnectTrigger />
     </Web3ConfigProvider>
   );
