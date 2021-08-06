@@ -1,4 +1,4 @@
 import ReactDOM from "react-dom";
-import { CursorExample } from "./CursorExample";
+import { WalletExample } from "./WalletExample";
 
-ReactDOM.render(<CursorExample />, document.getElementById("main"));
+ReactDOM.render(<WalletExample />, document.getElementById("main"));
