@@ -16,6 +16,7 @@ export const useWalletModalState = () => {
     closeModal: () => {
       openContext.setOpenModalName(null);
     },
+    openModalName: openContext.openModalName,
     modalWalletOpen: openContext.openModalName === WALLET_MODAL_NAME,
   };
 };

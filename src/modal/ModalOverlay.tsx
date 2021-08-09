@@ -1,18 +1,17 @@
 import { Fragment, ReactNode, useCallback, useContext, useEffect } from "react";
 import { DialogOverlay } from "@reach/dialog";
-import {
-  WalletModalOpenContext,
-  WALLET_MODAL_NAME,
-} from "../context/WalletModalOpenContext";
+import { WalletModalOpenContext } from "../context/WalletModalOpenContext";
 import { useThemeConfig } from "../hooks/useThemeConfig";
-import { isClientSide } from "src/constants";
+import { isClientSide } from "../constants";
 
 export const ModalOverlay = ({
   children,
   canClose,
+  modalName,
 }: {
   children: ReactNode;
   canClose: boolean;
+  modalName: string;
 }) => {
   const { openModalName, setOpenModalName } = useContext(
     WalletModalOpenContext
@@ -49,7 +48,7 @@ export const ModalOverlay = ({
     };
   });
 
-  return openModalName === WALLET_MODAL_NAME ? (
+  return openModalName === modalName ? (
     <DialogOverlay onDismiss={handleOnDismiss} {...getStyles("dialogOverlay")}>
       {children}
     </DialogOverlay>

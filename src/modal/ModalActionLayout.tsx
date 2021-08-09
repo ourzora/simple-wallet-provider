@@ -6,18 +6,20 @@ export const ModalActionLayout = ({
   children,
   error,
   modalTitle,
+  modalName,
   modalDescription,
 }: {
   modalTitle: string;
   modalDescription: string;
+  modalName: string;
   children: any;
   error?: string;
 }) => {
   const { getStyles } = useThemeConfig();
   return (
-    <ModalOverlay canClose>
+    <ModalOverlay modalName={modalName} canClose>
       <ModalContent title={modalTitle} ariaLabel={modalDescription}>
-        <div {...getStyles("modalContent")}>
+        <div {...getStyles("modalText")}>
           {children}
           {error && (
             <p className="error">

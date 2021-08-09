@@ -20,7 +20,13 @@ export const Theme = {
     display: flex;
     text-align: center;
   `,
+  modalText: css`
+    pointer-events: auto;
+    padding: 20px;
+    background-color: white;
+  `,
   modalContent: css`
+    pointer-events: none;
     display: flex;
     flex: auto;
     flex-direction: column;

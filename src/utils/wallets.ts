@@ -1,4 +1,4 @@
-import { Theme } from "src/constants";
+import { Theme } from "../constants";
 import { Web3ConfigurationContextType } from "../types";
 
 type ConnectorsType = NonNullable<Web3ConfigurationContextType["connectors"]>;

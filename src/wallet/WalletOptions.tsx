@@ -12,7 +12,7 @@ import { WalletOption } from "./WalletOption";
 import { UserRejectedRequestError as UserRejectedRequestErrorInjected } from "@web3-react/injected-connector";
 import { Web3ConfigurationContext } from "../config";
 import { useThemeConfig } from "../hooks/useThemeConfig";
-import { useWalletModalState } from "src/hooks/useWalletModalState";
+import { useWalletModalState } from "../hooks/useWalletModalState";
 
 export const WalletOptions: React.FC = () => {
   const { deactivate, error, active, activate } = useWeb3React();
