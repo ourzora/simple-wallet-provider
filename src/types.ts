@@ -6,7 +6,7 @@ export type Web3ConfigurationContextType = {
   networkId?: number;
   rpcUrl?: string;
   connectors?: {
-    walletConnectConnector: WalletConnectConnector;
+    walletConnectConnector?: WalletConnectConnector;
     injectedConnector: InjectedConnector;
   };
   theme: typeof Theme;

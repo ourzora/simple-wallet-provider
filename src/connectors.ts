@@ -17,7 +17,7 @@ export function getConnectorType(connector: AbstractConnector) {
 
 export function fetchLastConnectorType(
   connectors: NonNullable<Web3ConfigurationContextType["connectors"]>
-): AbstractConnector {
+): AbstractConnector | undefined {
   const last = sessionStorage.getItem(LAST_CONNECTOR_KEY);
   if (last === ConnectorType.WALLETCONNECT) {
     return connectors.walletConnectConnector;

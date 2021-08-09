@@ -64,7 +64,9 @@ export function useEagerConnect() {
 
     delay(500).then(() => {
       const connector = fetchLastConnectorType(connectors);
-      attemptEager(connector).catch(() => setTried(true));
+      if (connector) {
+        attemptEager(connector).catch(() => setTried(true));
+      }
     });
     setTried(true);
   }, [activate, attemptEager, tried]);

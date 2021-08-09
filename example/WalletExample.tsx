@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { useWalletState, Web3ConfigProvider } from "../src/";
+import { useWalletButton, Web3ConfigProvider } from "../src/";
 
 const CLIENT_INFO = {
   name: "testing wallet connector",
@@ -9,7 +9,7 @@ const CLIENT_INFO = {
 };
 
 const ConnectTrigger = () => {
-  const { buttonAction, actionText, connectedInfo } = useWalletState();
+  const { buttonAction, actionText, connectedInfo } = useWalletButton();
 
   return (
     <Fragment>

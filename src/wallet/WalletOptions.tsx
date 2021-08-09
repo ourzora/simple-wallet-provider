@@ -76,7 +76,11 @@ export const WalletOptions: React.FC = () => {
     () =>
       walletOptions.map((option: WalletInfo, idx) => {
         const { name, connectorKey, iconStyle } = option;
-        if (!connectorKey || !connectors) {
+        if (
+          !connectorKey ||
+          !connectors ||
+          connectors[connectorKey] === undefined
+        ) {
           return null;
         }
 
@@ -84,7 +88,10 @@ export const WalletOptions: React.FC = () => {
           <WalletOption
             key={idx}
             iconStylesKey={iconStyle}
-            onClick={() => handleActivate(connectors[connectorKey])}
+            onClick={() =>
+              // null check not working to fix type above, manually do it here
+              handleActivate(connectors[connectorKey] as AbstractConnector)
+            }
           >
             {name}
           </WalletOption>

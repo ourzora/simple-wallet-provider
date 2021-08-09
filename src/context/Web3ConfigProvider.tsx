@@ -20,7 +20,7 @@ export const Web3ConfigProvider = ({
 }: {
   theme?: Partial<typeof Theme>;
   strings?: Partial<typeof Strings>;
-  rpcUrl: string;
+  rpcUrl?: string;
   networkId: number;
   children: ReactNode;
   clientInfo: WalletClientInfo;
@@ -29,18 +29,18 @@ export const Web3ConfigProvider = ({
     supportedChainIds: [networkId],
   });
 
-  const walletConnectConnector = new WalletConnectConnector({
-    rpc: { [networkId]: rpcUrl },
-    bridge: "https://zora.bridge.walletconnect.org",
-    qrcode: true,
-    pollingInterval: 15000,
-    qrcodeModalOptions: {
-      mobileLinks: ["rainbow", "metamask", "trust", "imtoken", "argent"],
-    },
-    clientMeta: clientInfo,
-  });
-
-  console.log(walletConnectConnector);
+  const walletConnectConnector = rpcUrl
+    ? new WalletConnectConnector({
+        rpc: { [networkId]: rpcUrl },
+        bridge: "https://zora.bridge.walletconnect.org",
+        qrcode: true,
+        pollingInterval: 15000,
+        qrcodeModalOptions: {
+          mobileLinks: ["rainbow", "metamask", "trust", "imtoken", "argent"],
+        },
+        clientMeta: clientInfo,
+      })
+    : undefined;
 
   const config = {
     networkId: networkId,
