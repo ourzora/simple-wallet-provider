@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { css } from "@emotion/css";
-import { Web3ConfigurationContext } from "./config";
-import { Theme, Strings } from "./constants";
+import { Web3ConfigurationContext } from "../config";
+import { Theme, Strings } from "../constants";
 
 type ThemeType = typeof Theme;
 

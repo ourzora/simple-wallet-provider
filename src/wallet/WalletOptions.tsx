@@ -1,7 +1,7 @@
 import React, { useCallback, useContext, useEffect, useMemo } from "react";
-import { SUPPORTED_WALLETS, WalletInfo } from "./utils/wallets";
+import { SUPPORTED_WALLETS, WalletInfo } from "../utils/wallets";
 import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
-import { isClientSide } from "./constants";
+import { isClientSide } from "../constants";
 import { isMobile } from "react-device-detect";
 import { AbstractConnector } from "@web3-react/abstract-connector";
 import {
@@ -10,22 +10,21 @@ import {
 } from "@web3-react/walletconnect-connector";
 import { WalletOption } from "./WalletOption";
 import { UserRejectedRequestError as UserRejectedRequestErrorInjected } from "@web3-react/injected-connector";
-import { Web3ConfigurationContext } from "./config";
-import { useThemeConfig } from "./useThemeConfig";
-import { WalletModalOpenContext } from "./WalletModalOpenContext";
-import "@walletconnect/web3-provider";
+import { Web3ConfigurationContext } from "../config";
+import { useThemeConfig } from "../hooks/useThemeConfig";
+import { useWalletModalState } from "src/hooks/useWalletModalState";
 
 export const WalletOptions: React.FC = () => {
   const { deactivate, error, active, activate } = useWeb3React();
   const { getStyles } = useThemeConfig();
-  const { setIsOpen } = useContext(WalletModalOpenContext);
+  const { closeModal, modalWalletOpen } = useWalletModalState();
   const { connectors, networkId } = useContext(Web3ConfigurationContext);
 
   useEffect(() => {
-    if (active) {
-      setIsOpen(false);
+    if (active && modalWalletOpen) {
+      closeModal();
     }
-  }, [active]);
+  }, [active, modalWalletOpen, closeModal]);
 
   // @ts-ignore
   const hasWeb3 = isClientSide && !!window?.web3;

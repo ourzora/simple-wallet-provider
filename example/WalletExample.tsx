@@ -1,6 +1,5 @@
 import React, { Fragment } from "react";
-import { Web3ConfigProvider } from "../src/Web3ConfigProvider";
-import { useWalletState } from "../src/useWalletState";
+import { useWalletState, Web3ConfigProvider } from "../src/";
 
 const CLIENT_INFO = {
   name: "testing wallet connector",

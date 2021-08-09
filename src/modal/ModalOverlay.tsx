@@ -1,7 +1,11 @@
 import { Fragment, ReactNode, useCallback, useContext, useEffect } from "react";
 import { DialogOverlay } from "@reach/dialog";
-import { WalletModalOpenContext } from "./WalletModalOpenContext";
-import { useThemeConfig } from "./useThemeConfig";
+import {
+  WalletModalOpenContext,
+  WALLET_MODAL_NAME,
+} from "../context/WalletModalOpenContext";
+import { useThemeConfig } from "../hooks/useThemeConfig";
+import { isClientSide } from "src/constants";
 
 export const ModalOverlay = ({
   children,
@@ -10,15 +14,17 @@ export const ModalOverlay = ({
   children: ReactNode;
   canClose: boolean;
 }) => {
-  const { isOpen, setIsOpen } = useContext(WalletModalOpenContext);
+  const { openModalName, setOpenModalName } = useContext(
+    WalletModalOpenContext
+  );
   const { getStyles } = useThemeConfig();
 
   const handleOnDismiss = useCallback(() => {
     console.log("dismiss");
-    if (canClose && setIsOpen) {
-      setIsOpen(false);
+    if (canClose && setOpenModalName) {
+      setOpenModalName(null);
     }
-  }, [canClose, setIsOpen]);
+  }, [canClose, setOpenModalName]);
 
   const onEscape = useCallback(
     (e: KeyboardEvent) => {
@@ -27,21 +33,23 @@ export const ModalOverlay = ({
       }
 
       if (e.key === "Escape") {
-        return setIsOpen(false);
+        return setOpenModalName(null);
       }
     },
-    [canClose, setIsOpen]
+    [canClose, setOpenModalName]
   );
 
   useEffect(() => {
-    if (typeof window === "undefined") return;
+    if (!isClientSide) {
+      return;
+    }
     window.document.addEventListener("keydown", onEscape, true);
     return () => {
       window.document.removeEventListener("keydown", onEscape, true);
     };
   });
 
-  return isOpen ? (
+  return openModalName === WALLET_MODAL_NAME ? (
     <DialogOverlay onDismiss={handleOnDismiss} {...getStyles("dialogOverlay")}>
       {children}
     </DialogOverlay>

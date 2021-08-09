@@ -24,3 +24,9 @@ export type WalletClientInfo = {
   description: string;
   icons: string[];
 };
+
+export enum ModalType {
+  LIST_MODAL = "LIST_MODAL",
+  BID_MODAL = "BID_MODAL",
+  MANAGE_MODAL = "MANAGE_MODAL",
+}

@@ -1,6 +1,6 @@
 import { DialogContent, DialogContentProps } from "@reach/dialog";
 import { ReactNode } from "react";
-import { useThemeConfig } from "./useThemeConfig";
+import { useThemeConfig } from "../hooks/useThemeConfig";
 
 export interface ModalContentProps extends DialogContentProps {
   className?: string;

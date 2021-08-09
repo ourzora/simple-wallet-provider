@@ -1,8 +1,8 @@
-import { useThemeConfig } from "./useThemeConfig";
+import { useThemeConfig } from "../hooks/useThemeConfig";
 import { ModalOverlay } from "./ModalOverlay";
 import { ModalContent } from "./ModalContent";
 
-export const WalletActionModalLayout = ({
+export const ModalActionLayout = ({
   children,
   error,
   modalTitle,

@@ -1,6 +1,6 @@
 import React from "react";
-import { Theme } from "./constants";
-import { useThemeConfig } from "./useThemeConfig";
+import { Theme } from "../constants";
+import { useThemeConfig } from "../hooks/useThemeConfig";
 
 interface WalletOptionProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {

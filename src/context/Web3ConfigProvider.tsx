@@ -1,13 +1,13 @@
-import { Web3ConfigurationContext } from "./config";
+import { Web3ConfigurationContext } from "../config";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 import { Fragment, ReactNode, useMemo, useState } from "react";
-import { WalletClientInfo } from "./types";
-import { Theme, Strings } from "./constants";
+import { WalletClientInfo } from "../types";
+import { Theme, Strings } from "../constants";
 import { WalletModalOpenContext } from "./WalletModalOpenContext";
-import { ConnectWalletModal } from "./ConnectWalletModal";
+import { ConnectWalletModal } from "../wallet/ConnectWalletModal";
 import { Web3ReactProvider } from "@web3-react/core";
-import { getLibraryByNetwork } from "./utils/getLibrary";
+import { getLibraryByNetwork } from "../utils/getLibrary";
 import Web3ReactManager from "./Web3ReactManager";
 
 export const Web3ConfigProvider = ({
@@ -53,12 +53,14 @@ export const Web3ConfigProvider = ({
     strings: Object.assign({}, Strings, strings),
   };
 
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [openModalName, setOpenModalName] = useState<string | null>(null);
   const getLibrary = useMemo(() => getLibraryByNetwork(networkId), [networkId]);
 
   return (
     <Web3ReactProvider getLibrary={getLibrary}>
-      <WalletModalOpenContext.Provider value={{ isOpen, setIsOpen }}>
+      <WalletModalOpenContext.Provider
+        value={{ openModalName, setOpenModalName }}
+      >
         <Web3ConfigurationContext.Provider value={config}>
           <Web3ReactManager>
             <Fragment>
