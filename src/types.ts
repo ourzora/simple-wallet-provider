@@ -18,13 +18,6 @@ export enum ConnectorType {
   INJECTED = "INJECTED",
 }
 
-export type WalletClientInfo = {
-  name: string;
-  url: string;
-  description: string;
-  icons: string[];
-};
-
 export enum ModalType {
   LIST_MODAL = "LIST_MODAL",
   BID_MODAL = "BID_MODAL",

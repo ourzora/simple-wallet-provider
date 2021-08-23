@@ -59,6 +59,7 @@ export const Theme = {
   injectedIcon: css``,
   metamaskIcon: css``,
   walletConnectIcon: css``,
+  modalConnectWalletButtonStyle: css``,
 };
 
 export const Strings = {

@@ -2,7 +2,6 @@ import { Web3ConfigurationContext } from "../config";
 import { InjectedConnector } from "@web3-react/injected-connector";
 import { WalletConnectConnector } from "@web3-react/walletconnect-connector";
 import { Fragment, ReactNode, useMemo, useState } from "react";
-import { WalletClientInfo } from "../types";
 import { Theme, Strings } from "../constants";
 import { WalletModalOpenContext } from "./WalletModalOpenContext";
 import { ConnectWalletModal } from "../wallet/ConnectWalletModal";
@@ -14,7 +13,6 @@ export const Web3ConfigProvider = ({
   rpcUrl,
   networkId,
   children,
-  clientInfo,
   theme = {},
   strings = {},
 }: {
@@ -23,7 +21,6 @@ export const Web3ConfigProvider = ({
   rpcUrl?: string;
   networkId: number;
   children: ReactNode;
-  clientInfo: WalletClientInfo;
 }) => {
   const injectedConnector = new InjectedConnector({
     supportedChainIds: [networkId],
@@ -32,13 +29,7 @@ export const Web3ConfigProvider = ({
   const walletConnectConnector = rpcUrl
     ? new WalletConnectConnector({
         rpc: { [networkId]: rpcUrl },
-        bridge: "https://zora.bridge.walletconnect.org",
         qrcode: true,
-        pollingInterval: 15000,
-        qrcodeModalOptions: {
-          mobileLinks: ["rainbow", "metamask", "trust", "imtoken", "argent"],
-        },
-        clientMeta: clientInfo,
       })
     : undefined;
 
@@ -57,10 +48,10 @@ export const Web3ConfigProvider = ({
   const getLibrary = useMemo(() => getLibraryByNetwork(networkId), [networkId]);
 
   return (
-    <Web3ReactProvider getLibrary={getLibrary}>
-      <WalletModalOpenContext.Provider
-        value={{ openModalName, setOpenModalName }}
-      >
+    <WalletModalOpenContext.Provider
+      value={{ openModalName, setOpenModalName }}
+    >
+      <Web3ReactProvider getLibrary={getLibrary}>
         <Web3ConfigurationContext.Provider value={config}>
           <Web3ReactManager>
             <Fragment>
@@ -69,7 +60,7 @@ export const Web3ConfigProvider = ({
             </Fragment>
           </Web3ReactManager>
         </Web3ConfigurationContext.Provider>
-      </WalletModalOpenContext.Provider>
-    </Web3ReactProvider>
+      </Web3ReactProvider>
+    </WalletModalOpenContext.Provider>
   );
 };
