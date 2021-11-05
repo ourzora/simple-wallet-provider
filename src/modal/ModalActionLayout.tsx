@@ -51,7 +51,7 @@ export const ModalActionLayout = ({
             <a href="#" onClick={openConnectWallet}>
               connect your wallet
             </a>
-            to cotinue
+            to continue
           </div>
         </ModalContent>
       )}
