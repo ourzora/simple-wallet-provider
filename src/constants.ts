@@ -56,6 +56,7 @@ export const Theme = {
     width: 100%;
     text-align: center;
   `,
+  modalHeader: css``,
   injectedIcon: css``,
   metamaskIcon: css``,
   walletConnectIcon: css``,
@@ -68,4 +69,7 @@ export const Strings = {
   CONNECT_WALLET_BUTTON_TEXT: "Connect Wallet",
   CONNECTED_BUTTON_TEXT: "Connected to ",
   DISCONNECT_WALLET_BUTTON_TEXT: "Disconnect Wallet",
+  PROMPT_PLEASE_CONNECT_PROMPT: "Please",
+  PROMPT_CONNECT_ACTION: "connect your wallet",
+  PROMPT_AFTER_CONNECT_TO_CONTINUE: "to continue",
 };

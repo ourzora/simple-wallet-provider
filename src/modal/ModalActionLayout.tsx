@@ -1,9 +1,11 @@
+import { useWeb3React } from "@web3-react/core";
+import { SyntheticEvent, useCallback } from "react";
+
 import { useThemeConfig } from "../hooks/useThemeConfig";
 import { ModalOverlay } from "./ModalOverlay";
 import { ModalContent } from "./ModalContent";
-import { useWeb3React } from "@web3-react/core";
-import { SyntheticEvent, useCallback } from "react";
-import { useWalletModalState } from "src/hooks/useWalletModalState";
+import { useWalletModalState } from "../hooks/useWalletModalState";
+import { CloseButton } from "src/components/CloseButton";
 
 export const ModalActionLayout = ({
   children,
@@ -19,7 +21,7 @@ export const ModalActionLayout = ({
   error?: string;
 }) => {
   const { getString, getStyles } = useThemeConfig();
-  const { openWallet, modalWalletOpen } = useWalletModalState();
+  const { openWallet, closeModal, modalWalletOpen } = useWalletModalState();
   const { account } = useWeb3React();
 
   const openConnectWallet = useCallback((evt: SyntheticEvent) => {
@@ -31,6 +33,12 @@ export const ModalActionLayout = ({
     <ModalOverlay modalName={modalName} canClose>
       {account || modalWalletOpen ? (
         <ModalContent title={modalTitle} ariaLabel={modalDescription}>
+          <div {...getStyles("modalHeader")}>
+            <div>{modalTitle}</div>
+            <button onClick={closeModal}>
+              <CloseButton />
+            </button>
+          </div>
           <div {...getStyles("modalText")}>
             {children}
             {error && (
@@ -47,11 +55,11 @@ export const ModalActionLayout = ({
           ariaLabel={getString("CONNECT_WALLET")}
         >
           <div {...getStyles("modalText")}>
-            Please
+            {getString("PROMPT_PLEASE_CONNECT_PROMPT")}
             <a href="#" onClick={openConnectWallet}>
-              connect your wallet
+              {getString("PROMPT_CONNECT_ACTION")}
             </a>
-            to cotinue
+            {getString("PROMPT_AFTER_CONNECT_TO_CONTINUE")}
           </div>
         </ModalContent>
       )}
