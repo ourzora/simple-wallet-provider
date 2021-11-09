@@ -1,13 +1,6 @@
 import React, { Fragment } from "react";
 import { useWalletButton, Web3ConfigProvider } from "../src/";
 
-const CLIENT_INFO = {
-  name: "testing wallet connector",
-  url: "http://localhost:1234",
-  description: "testing wallet",
-  icons: [],
-};
-
 const ConnectTrigger = () => {
   const { buttonAction, actionText, connectedInfo } = useWalletButton();
 
@@ -21,7 +14,7 @@ const ConnectTrigger = () => {
 
 export const WalletExample = () => {
   return (
-    <Web3ConfigProvider rpcUrl="" networkId={1} clientInfo={CLIENT_INFO}>
+    <Web3ConfigProvider rpcUrl={undefined} networkId={1}>
       <ConnectTrigger />
     </Web3ConfigProvider>
   );

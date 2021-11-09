@@ -5,7 +5,7 @@ import { useThemeConfig } from "../hooks/useThemeConfig";
 import { ModalOverlay } from "./ModalOverlay";
 import { ModalContent } from "./ModalContent";
 import { useWalletModalState } from "../hooks/useWalletModalState";
-import { CloseButton } from "src/components/CloseButton";
+import { CloseButton } from "../components/CloseButton";
 
 export const ModalActionLayout = ({
   children,
@@ -33,13 +33,13 @@ export const ModalActionLayout = ({
     <ModalOverlay modalName={modalName} canClose>
       {account || modalWalletOpen ? (
         <ModalContent title={modalTitle} ariaLabel={modalDescription}>
-          <div {...getStyles("modalHeader")}>
-            <div>{modalTitle}</div>
-            <button onClick={closeModal}>
-              <CloseButton />
-            </button>
-          </div>
           <div {...getStyles("modalText")}>
+            <div {...getStyles("modalHeader")}>
+              <div {...getStyles("modalTitleText")}>{modalTitle}</div>
+              <button {...getStyles("modalClose")} onClick={closeModal}>
+                <CloseButton />
+              </button>
+            </div>
             {children}
             {error && (
               <p className="error">
