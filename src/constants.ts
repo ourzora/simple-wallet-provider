@@ -16,14 +16,16 @@ export const Theme = {
     margin: 0;
     z-index: 99999999;
     overflow: auto;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.3);
     display: flex;
     text-align: center;
   `,
   modalText: css`
+    position: relative;
     pointer-events: auto;
-    padding: 20px;
     background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 0px 2px, rgba(0, 0, 0, 0.1) 0px 2px 10px;
+    border-radius: 4px;
   `,
   modalContent: css`
     pointer-events: none;
@@ -32,19 +34,29 @@ export const Theme = {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 2px rgba(0, 0, 0, 0.05), 0 2px 10px rgba(0, 0, 0, 0.1);
     padding: 0;
     overflow-x: hidden;
   `,
-  walletOptionsWrapper: css``,
+  walletOptionsWrapper: css`
+    padding: 15px;
+  `,
   walletOption: css`
+    background: #dedede;
+    border: 0 none;
     position: relative;
     width: 100%;
-    padding: 20px;
+    padding: 20px 30px;
     margin-bottom: 20px;
     cursor: pointer;
+    transition: 0.3s background-color ease-in-out;
+    border-radius: 6px;
+    font: inherit;
+
     &:last-child {
       margin-bottom: 0;
+    }
+    &:hover {
+      background: #bbb;
     }
   `,
   walletOptionsList: css`
@@ -56,6 +68,28 @@ export const Theme = {
     width: 100%;
     text-align: center;
   `,
+  modalTitleText: css`
+    margin-top: 2px;
+    font-size: 1em;
+  `,
+  modalHeader: css`
+    position: relative;
+    border-bottom: 2px solid #dedede;
+    display: flex;
+    justify-content: space-between;
+    padding: 14px;
+    align-content: center;
+  `,
+  modalClose: css`
+    background: #fff;
+    padding: 4px;
+    border: 0 none;
+    border-radius: 4px;
+    cursor: pointer;
+    &:hover {
+      background-color: #eee;
+    }
+  `,
   injectedIcon: css``,
   metamaskIcon: css``,
   walletConnectIcon: css``,
@@ -63,9 +97,12 @@ export const Theme = {
 };
 
 export const Strings = {
-  CONNECT_WALLET: "connect wallet",
+  CONNECT_WALLET: "Connect Wallet",
   CONNECT_WALLET_ARIA_LABEL: "connect wallet modal",
   CONNECT_WALLET_BUTTON_TEXT: "Connect Wallet",
   CONNECTED_BUTTON_TEXT: "Connected to ",
   DISCONNECT_WALLET_BUTTON_TEXT: "Disconnect Wallet",
+  PROMPT_PLEASE_CONNECT_PROMPT: "Please",
+  PROMPT_CONNECT_ACTION: "connect your wallet",
+  PROMPT_AFTER_CONNECT_TO_CONTINUE: "to continue",
 };
