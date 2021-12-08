@@ -28,7 +28,14 @@ export const SUPPORTED_WALLETS: { [key: string]: WalletInfo } = {
     connectorKey: "walletConnectConnector",
     name: "WalletConnect",
     iconStyle: "walletConnectIcon",
-    description: "Connect to Trust Wallet, Rainbow Wallet and more...",
+    description: "Connect to Rainbow Wallet, Trust Wallet and more...",
+    mobile: true,
+  },
+  WALLET_LINK: {
+    connectorKey: "walletLinkConnector",
+    name: "Coinbase Wallet",
+    iconStyle: "walletConnectIcon",
+    description: "Connect to Coinbase Wallet",
     mobile: true,
   },
 };

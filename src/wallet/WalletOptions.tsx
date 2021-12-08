@@ -40,15 +40,6 @@ export const WalletOptions: React.FC = () => {
       onError?: (error: Error) => void,
       throwErrors?: boolean
     ) => {
-      if (
-        connector.constructor.name === 'WalletConnectConnector'
-      ) {
-        // @ts-ignore
-        connector.setWalletConnect = function() { (this as any).walletConnectProvider = new WalletConnectProvider(this.config) }
-        // @ts-ignore
-        connector.setWalletConnect();
-      }
-
       await activate(connector, onError, throwErrors);
       return Promise.resolve();
     },
@@ -78,7 +69,7 @@ export const WalletOptions: React.FC = () => {
   const renderWalletOptions = useMemo(
     () =>
       walletOptions.map((option: WalletInfo, idx) => {
-        const { name, connectorKey, iconStyle } = option;
+        const { name, connectorKey, iconStyle, description } = option;
         if (
           !connectorKey ||
           !connectors ||
@@ -95,6 +86,7 @@ export const WalletOptions: React.FC = () => {
               // null check not working to fix type above, manually do it here
               handleActivate(connectors[connectorKey] as AbstractConnector)
             }
+            title={description}
           >
             {name}
           </WalletOption>
