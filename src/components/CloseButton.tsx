@@ -14,5 +14,5 @@ export function CloseButton(props: React.SVGProps<SVGSVGElement>) {
         fill="#000"
       />
     </svg>
-  )
+  );
 }

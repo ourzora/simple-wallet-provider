@@ -13,6 +13,7 @@ import { UserRejectedRequestError as UserRejectedRequestErrorInjected } from "@w
 import { Web3ConfigurationContext } from "../config";
 import { useThemeConfig } from "../hooks/useThemeConfig";
 import { useWalletModalState } from "../hooks/useWalletModalState";
+import WalletConnectProvider from '@walletconnect/web3-provider';
 
 export const WalletOptions: React.FC = () => {
   const { deactivate, error, active, activate } = useWeb3React();
@@ -40,10 +41,12 @@ export const WalletOptions: React.FC = () => {
       throwErrors?: boolean
     ) => {
       if (
-        connector instanceof WalletConnectConnector &&
-        connector.walletConnectProvider?.wc?.uri
+        connector.constructor.name === 'WalletConnectConnector'
       ) {
-        connector.walletConnectProvider = undefined;
+        // @ts-ignore
+        connector.setWalletConnect = function() { (this as any).walletConnectProvider = new WalletConnectProvider(this.config) }
+        // @ts-ignore
+        connector.setWalletConnect();
       }
 
       await activate(connector, onError, throwErrors);
