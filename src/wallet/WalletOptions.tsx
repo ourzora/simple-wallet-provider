@@ -13,6 +13,7 @@ import { UserRejectedRequestError as UserRejectedRequestErrorInjected } from "@w
 import { Web3ConfigurationContext } from "../config";
 import { useThemeConfig } from "../hooks/useThemeConfig";
 import { useWalletModalState } from "../hooks/useWalletModalState";
+import WalletConnectProvider from '@walletconnect/web3-provider';
 
 export const WalletOptions: React.FC = () => {
   const { deactivate, error, active, activate } = useWeb3React();
@@ -39,13 +40,6 @@ export const WalletOptions: React.FC = () => {
       onError?: (error: Error) => void,
       throwErrors?: boolean
     ) => {
-      if (
-        connector instanceof WalletConnectConnector &&
-        connector.walletConnectProvider?.wc?.uri
-      ) {
-        connector.walletConnectProvider = undefined;
-      }
-
       await activate(connector, onError, throwErrors);
       return Promise.resolve();
     },
@@ -75,7 +69,7 @@ export const WalletOptions: React.FC = () => {
   const renderWalletOptions = useMemo(
     () =>
       walletOptions.map((option: WalletInfo, idx) => {
-        const { name, connectorKey, iconStyle } = option;
+        const { name, connectorKey, iconStyle, description } = option;
         if (
           !connectorKey ||
           !connectors ||
@@ -92,6 +86,7 @@ export const WalletOptions: React.FC = () => {
               // null check not working to fix type above, manually do it here
               handleActivate(connectors[connectorKey] as AbstractConnector)
             }
+            title={description}
           >
             {name}
           </WalletOption>

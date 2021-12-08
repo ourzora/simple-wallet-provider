@@ -1,5 +1,6 @@
 import type { InjectedConnector } from "@web3-react/injected-connector";
 import type { WalletConnectConnector } from "@web3-react/walletconnect-connector";
+import { WalletLinkConnector } from "@web3-react/walletlink-connector";
 import { Strings, Theme } from "./constants";
 
 export type Web3ConfigurationContextType = {
@@ -7,6 +8,7 @@ export type Web3ConfigurationContextType = {
   rpcUrl?: string;
   connectors?: {
     walletConnectConnector?: WalletConnectConnector;
+    walletLinkConnector?: WalletLinkConnector;
     injectedConnector: InjectedConnector;
   };
   theme: typeof Theme;
@@ -15,6 +17,7 @@ export type Web3ConfigurationContextType = {
 
 export enum ConnectorType {
   WALLETCONNECT = "WALLETCONNECT",
+  WALLETLINK = "WALLETLINK",
   INJECTED = "INJECTED",
 }
 

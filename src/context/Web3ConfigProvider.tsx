@@ -8,6 +8,9 @@ import { ConnectWalletModal } from "../wallet/ConnectWalletModal";
 import { Web3ReactProvider } from "@web3-react/core";
 import { getLibraryByNetwork } from "../utils/getLibrary";
 import Web3ReactManager from "./Web3ReactManager";
+import WalletConnectProvider from "@walletconnect/web3-provider";
+import { WalletLinkConnector } from "@web3-react/walletlink-connector";
+import WalletLink from "walletlink";
 
 export const Web3ConfigProvider = ({
   rpcUrl,
@@ -26,12 +29,35 @@ export const Web3ConfigProvider = ({
     supportedChainIds: [networkId],
   });
 
-  const walletConnectConnector = rpcUrl
-    ? new WalletConnectConnector({
-        rpc: { [networkId]: rpcUrl },
-        qrcode: true,
-      })
-    : undefined;
+  let walletConnectConnector = undefined;
+  if (rpcUrl) {
+    const walletConnectConfig = {
+      rpc: { [networkId]: rpcUrl },
+      qrcode: true,
+    };
+
+    walletConnectConnector = new WalletConnectConnector(walletConnectConfig);
+
+    // Workaround to skip dynamic provider load
+    walletConnectConnector.walletConnectProvider = new WalletConnectProvider(
+      walletConnectConfig
+    );
+  }
+
+  let walletLinkConnector = undefined;
+  if (rpcUrl && strings.WALLETLINK_APP_NAME)  {
+    const walletLinkConfig = {
+      url: rpcUrl,
+      supportedChainIds: [networkId],
+      appName: strings.WALLETLINK_APP_NAME,
+      appLogoUrl: strings.WALLETLINK_APP_LOGO_URL,
+    };
+
+    walletLinkConnector = new WalletLinkConnector(walletLinkConfig);
+    walletLinkConnector.walletLink = new WalletLink(walletLinkConfig);
+    // @ts-ignore
+    walletLinkConnector.provider = walletLinkConnector.walletLink.makeWeb3Provider(rpcUrl, networkId);
+  }
 
   const config = {
     networkId: networkId,
@@ -39,6 +65,7 @@ export const Web3ConfigProvider = ({
     connectors: {
       injectedConnector,
       walletConnectConnector,
+      walletLinkConnector,
     },
     theme: Object.assign({}, Theme, theme),
     strings: Object.assign({}, Strings, strings),
