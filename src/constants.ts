@@ -106,6 +106,6 @@ export const Strings = {
   PROMPT_PLEASE_CONNECT_PROMPT: "Please",
   PROMPT_CONNECT_ACTION: "connect your wallet",
   PROMPT_AFTER_CONNECT_TO_CONTINUE: "to continue",
-  WALLETLINK_APP_NAME: undefined,
-  WALLETLINK_APP_LOGO_URL: undefined,
+  WALLETLINK_APP_NAME: "",
+  WALLETLINK_APP_LOGO_URL: "",
 };

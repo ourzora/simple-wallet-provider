@@ -45,18 +45,22 @@ export const Web3ConfigProvider = ({
   }
 
   let walletLinkConnector = undefined;
-  if (rpcUrl && strings.WALLETLINK_APP_NAME)  {
+  if (rpcUrl && strings.WALLETLINK_APP_NAME) {
     const walletLinkConfig = {
       url: rpcUrl,
       supportedChainIds: [networkId],
       appName: strings.WALLETLINK_APP_NAME,
-      appLogoUrl: strings.WALLETLINK_APP_LOGO_URL,
+      appLogoUrl:
+        strings.WALLETLINK_APP_LOGO_URL === ""
+          ? undefined
+          : strings.WALLETLINK_APP_LOGO_URL,
     };
 
     walletLinkConnector = new WalletLinkConnector(walletLinkConfig);
     walletLinkConnector.walletLink = new WalletLink(walletLinkConfig);
     // @ts-ignore
-    walletLinkConnector.provider = walletLinkConnector.walletLink.makeWeb3Provider(rpcUrl, networkId);
+    walletLinkConnector.provider =
+      walletLinkConnector.walletLink.makeWeb3Provider(rpcUrl, networkId);
   }
 
   const config = {

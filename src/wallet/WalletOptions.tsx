@@ -4,16 +4,12 @@ import { UnsupportedChainIdError, useWeb3React } from "@web3-react/core";
 import { isClientSide } from "../constants";
 import { isMobile } from "react-device-detect";
 import { AbstractConnector } from "@web3-react/abstract-connector";
-import {
-  UserRejectedRequestError as UserRejectedRequestErrorWalletConnect,
-  WalletConnectConnector,
-} from "@web3-react/walletconnect-connector";
+import { UserRejectedRequestError as UserRejectedRequestErrorWalletConnect } from "@web3-react/walletconnect-connector";
 import { WalletOption } from "./WalletOption";
 import { UserRejectedRequestError as UserRejectedRequestErrorInjected } from "@web3-react/injected-connector";
 import { Web3ConfigurationContext } from "../config";
 import { useThemeConfig } from "../hooks/useThemeConfig";
 import { useWalletModalState } from "../hooks/useWalletModalState";
-import WalletConnectProvider from '@walletconnect/web3-provider';
 
 export const WalletOptions: React.FC = () => {
   const { deactivate, error, active, activate } = useWeb3React();
