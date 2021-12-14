@@ -30,7 +30,7 @@ export const ModalActionLayout = ({
   }, []);
 
   return (
-    <ModalOverlay modalName={modalName} canClose>
+    <ModalOverlay modalName={modalName} canClose={true}>
       {account || modalWalletOpen ? (
         <ModalContent title={modalTitle} ariaLabel={modalDescription}>
           <div {...getStyles("modalText")}>
@@ -42,7 +42,7 @@ export const ModalActionLayout = ({
             </div>
             {children}
             {error && (
-              <p className="error">
+              <p {...getStyles("modalError")}>
                 <br />
                 {error}
               </p>
