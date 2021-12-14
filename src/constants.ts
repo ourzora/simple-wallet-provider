@@ -95,6 +95,10 @@ export const Theme = {
   metamaskIcon: css``,
   walletConnectIcon: css``,
   modalConnectWalletButtonStyle: css``,
+  modalError: css`
+    padding: 12px;
+    color: #8b0000;
+  `,
 };
 
 export const Strings = {

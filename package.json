@@ -1,6 +1,6 @@
 {
   "name": "@zoralabs/simple-wallet-provider",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "simple wallet provider app",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
@@ -12,7 +12,8 @@
     "build": "yarn run prepack",
     "prettier": "prettier src --write",
     "prepack": "yarn clean && yarn run prettier && yarn run tsc",
-    "clean": "rm -rf ./dist"
+    "clean": "rm -rf ./dist",
+    "example": "npx parcel example/index.html"
   },
   "repository": "git@github.com:ourzora/simple-wallet-provider.git",
   "author": "Iain <iain@zora.co>",
