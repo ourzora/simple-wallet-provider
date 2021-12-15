@@ -14,6 +14,7 @@ const ConnectTrigger = () => {
 
 export const WalletExample = () => {
   return (
+    /* To test walletconnect, add rpcUrl */
     <Web3ConfigProvider rpcUrl={undefined} networkId={1}>
       <ConnectTrigger />
     </Web3ConfigProvider>
