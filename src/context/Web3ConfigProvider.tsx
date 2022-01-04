@@ -11,8 +11,6 @@ import {
   defaultChains,
 } from "wagmi";
 
-type ChainConfig = { chainId?: number };
-
 export const Web3ConfigProvider = ({
   rpcUrl,
   networkId,
@@ -26,7 +24,7 @@ export const Web3ConfigProvider = ({
   networkId: number;
   children: ReactNode;
 }) => {
-  const connectors = ({ chainId }: ChainConfig) => {
+  const connectors = (networkId?: number) => {
     const chain = defaultChains.find((x) => x.id === chainId)!;
     const chains = [chain];
     return [
@@ -48,7 +46,7 @@ export const Web3ConfigProvider = ({
   const config = {
     networkId: networkId,
     rpcUrl: rpcUrl,
-    connectors,
+    connectors: connectors(networkId),
     theme: Object.assign({}, Theme, theme),
     strings: Object.assign({}, Strings, strings),
   };
@@ -59,7 +57,7 @@ export const Web3ConfigProvider = ({
     <WalletModalOpenContext.Provider
       value={{ openModalName, setOpenModalName }}
     >
-      <WAGMIProvider autoConnect connectors={connectors}>
+      <WAGMIProvider autoConnect connectors={config.connectors}>
         <Web3ConfigurationContext.Provider value={config}>
           <Fragment>
             <ConnectWalletModal />
