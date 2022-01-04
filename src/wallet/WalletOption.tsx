@@ -9,7 +9,7 @@ interface WalletOptionProps
   href?: string;
   target?: string;
   rel?: string;
-  iconStylesKey: keyof typeof Theme;
+  iconStylesKey?: keyof typeof Theme;
 }
 
 export const WalletOption: React.FC<WalletOptionProps> = ({
@@ -24,7 +24,7 @@ export const WalletOption: React.FC<WalletOptionProps> = ({
   return (
     <Component {...getStyles("walletOption")} {...props}>
       {children}
-      <div {...getStyles(iconStylesKey)} />
+      {iconStylesKey && <div {...getStyles(iconStylesKey)} />}
     </Component>
   );
 };

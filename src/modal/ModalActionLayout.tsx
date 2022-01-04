@@ -1,4 +1,3 @@
-import { useWeb3React } from "@web3-react/core";
 import { SyntheticEvent, useCallback } from "react";
 
 import { useThemeConfig } from "../hooks/useThemeConfig";
@@ -6,6 +5,7 @@ import { ModalOverlay } from "./ModalOverlay";
 import { ModalContent } from "./ModalContent";
 import { useWalletModalState } from "../hooks/useWalletModalState";
 import { CloseButton } from "../components/CloseButton";
+import { useConnect } from "wagmi";
 
 export const ModalActionLayout = ({
   children,
@@ -22,7 +22,7 @@ export const ModalActionLayout = ({
 }) => {
   const { getString, getStyles } = useThemeConfig();
   const { openWallet, closeModal, modalWalletOpen } = useWalletModalState();
-  const { account } = useWeb3React();
+  const [{ data: account }] = useConnect();
 
   const openConnectWallet = useCallback((evt: SyntheticEvent) => {
     evt.preventDefault();
@@ -31,7 +31,7 @@ export const ModalActionLayout = ({
 
   return (
     <ModalOverlay modalName={modalName} canClose={true}>
-      {account || modalWalletOpen ? (
+      {!!account || modalWalletOpen ? (
         <ModalContent title={modalTitle} ariaLabel={modalDescription}>
           <div {...getStyles("modalText")}>
             <div {...getStyles("modalHeader")}>

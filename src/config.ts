@@ -6,7 +6,7 @@ export const Web3ConfigurationContext =
   createContext<Web3ConfigurationContextType>({
     networkId: undefined,
     rpcUrl: undefined,
-    connectors: undefined,
+    connectors: [],
     theme: Theme,
     strings: Strings,
   });
