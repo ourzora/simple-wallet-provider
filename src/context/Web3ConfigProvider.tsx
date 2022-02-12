@@ -25,7 +25,7 @@ export const Web3ConfigProvider = ({
   children: ReactNode;
 }) => {
   const connectors = (networkId?: number) => {
-    const chain = defaultChains.find((x) => x.id === chainId)!;
+    const chain = defaultChains.find((x) => x.id === networkId)!;
     const chains = [chain];
     return [
       new InjectedConnector({ chains }),
